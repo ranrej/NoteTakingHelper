@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Taking Helper</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 Note Taking Helper</h1>
+            <p>Record, transcribe, and organize your notes efficiently</p>
+        </div>
+
+        <div class="content">
+            <!-- TRANSCRIPT SECTION -->
+            <div class="section">
+                <h2>🎙️ Transcript</h2>
+                
+                <div id="recordingIndicator" class="recording-indicator hidden">
+                    <span class="recording-dot"></span>
+                    Recording...
+                </div>
+
+                <div class="button-group">
+                    <button id="startRecordBtn" class="btn-primary" onclick="startRecording()">
+                        <span class="icon">●</span> Start Recording
+                    </button>
+                    <button id="pauseRecordBtn" class="btn-warning" onclick="pauseRecording()" disabled>
+                        <span class="icon">⏸</span> Pause
+                    </button>
+                    <button id="resumeRecordBtn" class="btn-secondary" onclick="resumeRecording()" disabled hidden>
+                        <span class="icon">▶</span> Resume
+                    </button>
+                </div>
+
+                <label for="transcriptText">Transcribed Text:</label>
+                <textarea id="transcriptText" placeholder="Transcribed text will appear here..."></textarea>
+
+                <div class="button-group">
+                    <button class="btn-success" onclick="saveTranscript()">
+                        <span class="icon">💾</span> Save
+                    </button>
+                    <button class="btn-info" onclick="downloadTranscript()">
+                        <span class="icon">⬇️</span> Download
+                    </button>
+                </div>
+            </div>
+
+            <!-- NOTES SECTION -->
+            <div class="section">
+                <h2>📄 Notes</h2>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="document.getElementById('notesFileInput').click()">
+                        <span class="icon">📤</span> Upload Notes
+                    </button>
+                    <input type="file" id="notesFileInput" accept=".docx,.doc,.txt" style="display: none;" onchange="uploadNotes(event)">
+                    
+                    <button class="btn-secondary" onclick="convertNotesToMarkdown()">
+                        <span class="icon">🔄</span> Convert to MD
+                    </button>
+                </div>
+
+                <label for="convertedNotesText">Converted Notes (Markdown):</label>
+                <textarea id="convertedNotesText" placeholder="Converted markdown content will appear here..."></textarea>
+            </div>
+
+            <!-- COMPLETE SECTION -->
+            <div class="section section-full">
+                <h2>✅ Complete</h2>
+
+                <div class="button-group">
+                    <button class="btn-success" onclick="finalizeWithChatGPT()" style="padding: 12px 32px; font-size: 1.1em;">
+                        <span class="icon">🚀</span> Finalize with ChatGPT
+                    </button>
+                </div>
+
+                <div id="statusBox" class="status-box hidden">
+                    <span id="statusText">Pending...</span>
+                </div>
+
+                <div id="responseTimeBox" class="response-time hidden">
+                    <strong>Response time:</strong> <span id="responseTime">0.0</span> seconds
+                </div>
+
+                <label for="chatGPTResponse">ChatGPT Response:</label>
+                <textarea id="chatGPTResponse" placeholder="ChatGPT will process your notes here..." readonly></textarea>
+
+                <div class="button-group">
+                    <button class="btn-info" onclick="downloadChatGPTResponse()">
+                        <span class="icon">⬇️</span> Save Response
+                    </button>
+                </div>
+            </div>
+
+            <!-- FEEDBACK SECTION -->
+            <div class="section section-full">
+                <h2>💬 Feedback</h2>
+
+                <label for="feedbackText">Optional Feedback:</label>
+                <textarea id="feedbackText" placeholder="Enter any feedback to improve the output..."></textarea>
+
+                <div class="button-group">
+                    <button class="btn-warning" onclick="applyFeedback()">
+                        <span class="icon">✨</span> Apply Feedback
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <button class="btn-danger" onclick="resetApp()" style="padding: 15px 40px; font-size: 1.1em;">
+                <span class="icon">🔄</span> New
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
